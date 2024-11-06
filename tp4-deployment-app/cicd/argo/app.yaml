@@ -1,0 +1,19 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: sample-app-httpd
+  namespace: openshift-gitops
+spec: 
+  destination: 
+    name: ''
+    namespace: eazytraining
+    server: 'https://kubernetes.default.svc'
+  project: default
+  source:
+    path: tp4-deployment-app/cicd/config/overlays/dev
+    repoURL: https://github.com/eazytraining/openshift-administrator-training.git
+    targetRevision: main
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
